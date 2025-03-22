@@ -2,8 +2,13 @@
 
 namespace SimpleStateMachine
 {
-    public static class StateMachineExtensions
+    public static class StateMachine
     {
+        public static T GetInitialState<T>() where T : struct, Enum
+        {
+            return (T) Enum.GetNames<T>().Select(x => GetField(typeof(T), x)).SingleOrDefault(x => HasAttribute<InitialStateAttribute>(x))?.GetValue(null);
+        }
+
         public static bool IsInitialState<T>(this T state) where T : Enum
         {
             return IsStateMachine<T>() && HasAttribute<InitialStateAttribute>(GetField(typeof(T), state.ToString()));

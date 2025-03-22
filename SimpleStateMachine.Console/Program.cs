@@ -22,6 +22,7 @@
         {
             var state = TicketState.Created;
 
+            var initialState = StateMachine.GetInitialState<TicketState>();
             var isStateMachine = state.IsStateMachine();
             var isInitialState = state.IsInitialState();
             var isFinalState = state.IsFinalState();
