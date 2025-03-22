@@ -19,7 +19,7 @@ namespace SimpleStateMachine
             return field.GetCustomAttribute<T>() != null;
         }
 
-        private static IEnumerable<T> GetTransitions<T>(this T state) where T : Enum
+        public static IEnumerable<T> GetTransitions<T>(this T state) where T : Enum
         {
             var transitions = GetField(typeof(T), state.ToString()).GetCustomAttribute<TransitionsAttribute<T>>();
             return transitions.Transitions ?? Enumerable.Empty<T>();
@@ -42,7 +42,7 @@ namespace SimpleStateMachine
 
         public static bool IsStateMachine(Type type)
         {
-            return type.IsEnum && Enum.GetNames(type).Any(name => HasAttribute<InitialStateAttribute>(GetField(type, name)));
+            return type.IsEnum && Enum.GetNames(type).Count(name => HasAttribute<InitialStateAttribute>(GetField(type, name))) == 1;
         }
 
         public static bool CanTransitionTo<T>(this T state, T target) where T : Enum

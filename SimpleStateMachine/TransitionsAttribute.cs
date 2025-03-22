@@ -6,7 +6,7 @@
     {
         public TransitionsAttribute(params T[] transitions)
         {
-            this.Transitions = transitions;
+            this.Transitions = transitions?.Distinct().OrderBy(x => x) ?? Enumerable.Empty<T>();
         }
 
         public IEnumerable<T> Transitions { get; }

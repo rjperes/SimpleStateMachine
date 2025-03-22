@@ -27,6 +27,7 @@
             var isFinalState = state.IsFinalState();
             var canTransitionToClosed = state.CanTransitionTo(TicketState.Closed);
             var canTransitionToBlocked = state.CanTransitionTo(TicketState.Blocked);
+            var transitions = state.GetTransitions();
         }
     }
 }
