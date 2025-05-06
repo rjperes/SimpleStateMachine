@@ -8,7 +8,7 @@
     <Title>Simple State Machine</Title>
     <Authors>Ricardo Peres</Authors>
     <RepositoryUrl>https://github.com/rjperes/SimpleStateMachine</RepositoryUrl>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
 </Project>

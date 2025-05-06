@@ -7,3 +7,4 @@
 /SimpleStateMachine/obj
 /SimpleStateMachine.Console/bin
 /SimpleStateMachine.Console/obj
+/publish_nuget.cmd
