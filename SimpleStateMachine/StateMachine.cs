@@ -4,6 +4,11 @@ namespace SimpleStateMachine
 {
     public static class StateMachine
     {
+        public static IStateMachine<T> Create<T>(this T state) where T : Enum
+        {
+            return new StateMachine<T>(state);
+        }
+
         public static T? GetInitialState<T>() where T : struct, Enum
         {
             return (T?) Enum.GetNames<T>().Select(x => GetField(typeof(T), x)).SingleOrDefault(x => HasAttribute<InitialStateAttribute>(x))?.GetValue(null);
@@ -16,7 +21,7 @@ namespace SimpleStateMachine
 
         private static FieldInfo GetField(Type type, string name)
         {
-            return type.GetField(name);
+            return type.GetField(name)!;
         }
 
         private static bool HasAttribute<T>(FieldInfo field) where T : Attribute
@@ -27,7 +32,7 @@ namespace SimpleStateMachine
         public static IEnumerable<T> GetTransitions<T>(this T state) where T : Enum
         {
             var transitions = GetField(typeof(T), state.ToString()).GetCustomAttribute<TransitionsAttribute<T>>();
-            return transitions.Transitions ?? Enumerable.Empty<T>();
+            return transitions!.Transitions ?? [];
         }
 
         public static bool IsStateMachine<T>() where T : Enum
@@ -37,7 +42,7 @@ namespace SimpleStateMachine
 
         public static bool IsStateMachine<T>(this T state) where T : Enum
         {
-            return IsStateMachine(typeof(T));
+            return IsStateMachine(state.GetType());
         }
 
         public static bool IsFinalState<T>(this T state) where T : Enum

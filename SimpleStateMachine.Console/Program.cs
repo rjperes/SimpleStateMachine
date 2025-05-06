@@ -18,17 +18,42 @@
 
     internal class Program
     {
-        static void Main(string[] args)
+        static void AlternativeUsingAttributes()
         {
-            var state = TicketState.Created;
+            var created = TicketState.Created;
 
             var initialState = StateMachine.GetInitialState<TicketState>();
-            var isStateMachine = state.IsStateMachine();
-            var isInitialState = state.IsInitialState();
-            var isFinalState = state.IsFinalState();
-            var canTransitionToClosed = state.CanTransitionTo(TicketState.Closed);
-            var canTransitionToBlocked = state.CanTransitionTo(TicketState.Blocked);
-            var transitions = state.GetTransitions();
+            var isStateMachine = created.IsStateMachine();
+            var isInitialState = created.IsInitialState();
+            var isFinalState = created.IsFinalState();
+            var canTransitionToClosed = created.CanTransitionTo(TicketState.Closed);
+            var canTransitionToBlocked = created.CanTransitionTo(TicketState.Blocked);
+            var transitions = created.GetTransitions();
+        }
+
+        static void AlternativeUsingCode()
+        {
+            var created = TicketState.Created;
+
+            var stateMachine = created.Create();
+            stateMachine.CanTransitionTo(created, TicketState.Ready, TicketState.Closed);
+            stateMachine.CanTransitionTo(TicketState.Ready, TicketState.Blocked, TicketState.InReview, TicketState.Closed, TicketState.Ready);
+            stateMachine.CanTransitionTo(TicketState.InProgress, TicketState.InProgress, TicketState.Closed);
+            stateMachine.CanTransitionTo(TicketState.Blocked, TicketState.InProgress, TicketState.Closed);
+            stateMachine.CanTransitionTo(TicketState.InReview, TicketState.InProgress, TicketState.Closed);
+
+            var initialState = stateMachine.GetInitialState();
+            var isInitialState = created.IsInitialState();
+            var isFinalState = created.IsFinalState();
+            var canTransitionToClosed = created.CanTransitionTo(TicketState.Closed);
+            var canTransitionToBlocked = created.CanTransitionTo(TicketState.Blocked);
+            var transitions = created.GetTransitions();
+        }
+
+        static void Main(string[] args)
+        {
+            AlternativeUsingAttributes();
+            AlternativeUsingCode();
         }
     }
 }
