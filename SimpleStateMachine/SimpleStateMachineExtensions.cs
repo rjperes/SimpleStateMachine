@@ -17,15 +17,7 @@
         {
             ArgumentNullException.ThrowIfNull(stateMachine);
 
-            foreach (var state in Enum.GetValues(typeof(T)).Cast<T>())
-            {
-                if (stateMachine.IsFinalState(state))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Enum.GetValues(typeof(T)).Cast<T>().Any(x => stateMachine.IsFinalState(x));
         }
     }
 }
