@@ -4,7 +4,7 @@ namespace SimpleStateMachine
     public interface IStateMachine<T> where T : Enum
     {
         T GetInitialState();
-        IStateMachine<T> CanTransitionTo(T state, params IReadOnlyCollection<T> otherStates);
+        IStateMachine<T> CanTransitionTo(T state, params T[] otherStates);
         IEnumerable<T> GetTransitions(T state);
         bool IsFinalState(T state);
         bool IsInitialState(T state);
@@ -20,7 +20,7 @@ namespace SimpleStateMachine
             return _initialState;
         }
 
-        public IStateMachine<T> CanTransitionTo(T state, params IReadOnlyCollection<T> otherStates)
+        public IStateMachine<T> CanTransitionTo(T state, params T[] otherStates)
         {
             _transitions[state] = [.. otherStates];
             return this;

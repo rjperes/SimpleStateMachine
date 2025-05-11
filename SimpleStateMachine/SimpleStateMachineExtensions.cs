@@ -2,7 +2,7 @@
 {
     public static class SimpleStateMachineExtensions
     {
-        public static IStateMachine<T> AppendTransitions<T>(this IStateMachine<T> stateMachine, T state, params IReadOnlyCollection<T> transitions) where T : Enum
+        public static IStateMachine<T> AppendTransitions<T>(this IStateMachine<T> stateMachine, T state, params T[] transitions) where T : Enum
         {
             ArgumentNullException.ThrowIfNull(stateMachine);
             ArgumentNullException.ThrowIfNull(transitions);
