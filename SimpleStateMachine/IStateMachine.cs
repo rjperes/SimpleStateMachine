@@ -22,6 +22,7 @@ namespace SimpleStateMachine
 
         public IStateMachine<T> CanTransitionTo(T state, params T[] otherStates)
         {
+            otherStates = otherStates ?? [];
             _transitions[state] = [.. otherStates];
             return this;
         }
