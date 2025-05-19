@@ -32,7 +32,7 @@ namespace SimpleStateMachine
         public static IEnumerable<T> GetTransitions<T>(this T state) where T : Enum
         {
             var transitions = GetField(typeof(T), state.ToString()).GetCustomAttribute<TransitionsAttribute<T>>();
-            return transitions!.Transitions ?? [];
+            return transitions?.Transitions ?? [];
         }
 
         public static bool IsStateMachine<T>() where T : Enum
