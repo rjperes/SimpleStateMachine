@@ -1,4 +1,6 @@
-﻿namespace SimpleStateMachine.Console
+﻿using SimpleStateMachine.Extensions;
+
+namespace SimpleStateMachine.Console
 {
     public enum TicketState
     {
@@ -43,17 +45,31 @@
             stateMachine.CanTransitionTo(TicketState.InReview, TicketState.InProgress, TicketState.Closed);
 
             var initialState = stateMachine.GetInitialState();
-            var isInitialState = created.IsInitialState();
-            var isFinalState = created.IsFinalState();
-            var canTransitionToClosed = created.CanTransitionTo(TicketState.Closed);
-            var canTransitionToBlocked = created.CanTransitionTo(TicketState.Blocked);
-            var transitions = created.GetTransitions();
+            var isInitialState = stateMachine.IsInitialState(created);
+            var isFinalState = stateMachine.IsFinalState(created);
+            var canTransitionToClosed = stateMachine.CanTransitionTo(created, TicketState.Closed);
+            var canTransitionToBlocked = stateMachine.CanTransitionTo(created, TicketState.Blocked);
+            var transitions = stateMachine.GetTransitions(created);
+        }
+
+        static void ConvertFromAttributesToCode()
+        {
+            var created = TicketState.Created;
+            var stateMachine = StateMachineExtensions.Create<TicketState>();
+
+            var initialState = stateMachine.GetInitialState();
+            var isInitialState = stateMachine.IsInitialState(created);
+            var isFinalState = stateMachine.IsFinalState(created);
+            var canTransitionToClosed = stateMachine.CanTransitionTo(created, TicketState.Closed);
+            var canTransitionToBlocked = stateMachine.CanTransitionTo(created, TicketState.Blocked);
+            var transitions = stateMachine.GetTransitions(created);
         }
 
         static void Main(string[] args)
         {
             AlternativeUsingAttributes();
             AlternativeUsingCode();
+            ConvertFromAttributesToCode();
         }
     }
 }

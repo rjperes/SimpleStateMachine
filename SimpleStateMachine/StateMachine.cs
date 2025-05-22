@@ -4,7 +4,7 @@ namespace SimpleStateMachine
 {
     public static class StateMachine
     {
-        public static IStateMachine<T> Create<T>(this T state) where T : Enum
+        public static IStateMachine<T> Create<T>(this T state) where T : struct, Enum
         {
             return new StateMachine<T>(state);
         }
