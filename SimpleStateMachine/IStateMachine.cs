@@ -8,11 +8,14 @@ namespace SimpleStateMachine
         IEnumerable<T> GetTransitions(T state);
         bool IsFinalState(T state);
         bool IsInitialState(T state);
+        void SetState(T state, object someState);
+        object? GetState(T state);
     }
 
     class StateMachine<T>(T state) : IStateMachine<T> where T : Enum
     {
         private readonly Dictionary<T, List<T>> _transitions = [];
+        private readonly Dictionary<T, object> _states = [];
         private readonly T _initialState = state;
 
         public T GetInitialState()
@@ -48,6 +51,20 @@ namespace SimpleStateMachine
         public bool IsInitialState(T state)
         {
             return object.Equals(_initialState, state);
+        }
+
+        public void SetState(T state, object someState)
+        {
+            _states[state] = someState;
+        }
+
+        public object? GetState(T state)
+        {
+            if (_states.TryGetValue(state, out var someState))
+            {
+                return someState;
+            }
+            return null;
         }
     }
 }

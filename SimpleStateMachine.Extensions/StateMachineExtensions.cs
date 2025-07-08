@@ -15,6 +15,11 @@
                 var transitions = state.GetTransitions();
                 if (transitions.Any())
                 {
+                    var someState = state.GetState();
+                    if (someState != null)
+                    {
+                        stateMachine.SetState(state, someState);
+                    }
                     stateMachine.CanTransitionTo(state, transitions.ToArray());
                 }
             }

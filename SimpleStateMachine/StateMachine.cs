@@ -29,6 +29,11 @@ namespace SimpleStateMachine
             return field.GetCustomAttribute<T>() != null;
         }
 
+        private static StateAttribute? GetCustomAttribute<T>(T state) where T : Enum
+        {
+            return GetField(typeof(T), state.ToString()).GetCustomAttribute<StateAttribute>();
+        }
+
         public static IEnumerable<T> GetTransitions<T>(this T state) where T : Enum
         {
             var transitions = GetField(typeof(T), state.ToString()).GetCustomAttribute<TransitionsAttribute<T>>();
@@ -58,6 +63,11 @@ namespace SimpleStateMachine
         public static bool CanTransitionTo<T>(this T state, T target) where T : Enum
         {
             return IsStateMachine<T>() && GetTransitions<T>(state).Contains(target);
+        }
+
+        public static object? GetState<T>(this T state) where T : struct, Enum
+        {
+            return IsStateMachine<T>() ? GetCustomAttribute(state)?.State : null;
         }
     }
 }

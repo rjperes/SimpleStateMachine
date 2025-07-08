@@ -5,6 +5,7 @@ namespace SimpleStateMachine.Console
     public enum TicketState
     {
         [InitialState]
+        [State("Initial State")]
         [Transitions<TicketState>(TicketState.Ready, TicketState.Closed)]
         Created,
         [Transitions<TicketState>(TicketState.InProgress, TicketState.Blocked, TicketState.Closed)]
@@ -25,6 +26,7 @@ namespace SimpleStateMachine.Console
             var created = TicketState.Created;
 
             var initialState = StateMachine.GetInitialState<TicketState>();
+            var state = initialState!.Value.GetState();
             var isStateMachine = created.IsStateMachine();
             var isInitialState = created.IsInitialState();
             var isFinalState = created.IsFinalState();
@@ -38,6 +40,8 @@ namespace SimpleStateMachine.Console
             var created = TicketState.Created;
 
             var stateMachine = created.Create();
+            stateMachine.SetState(created, "Initial State");
+            var state = stateMachine.GetState(created);
             stateMachine.CanTransitionTo(created, TicketState.Ready, TicketState.Closed);
             stateMachine.CanTransitionTo(TicketState.Ready, TicketState.Blocked, TicketState.InReview, TicketState.Closed, TicketState.Ready);
             stateMachine.CanTransitionTo(TicketState.InProgress, TicketState.InProgress, TicketState.Closed);
