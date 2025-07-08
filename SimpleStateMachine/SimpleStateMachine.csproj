@@ -9,7 +9,7 @@
     <Authors>Ricardo Peres</Authors>
     <PackageProjectUrl>https://github.com/rjperes/SimpleStateMachine</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rjperes/SimpleStateMachine</RepositoryUrl>
-    <Version>1.2.1</Version>
+    <Version>1.3.0</Version>
   </PropertyGroup>
 
 </Project>
