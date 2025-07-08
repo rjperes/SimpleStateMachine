@@ -4,6 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Simple State Machine Extensions</Title>
+    <Authors>Ricardo Peres</Authors>
+    <PackageProjectUrl>https://github.com/rjperes/SimpleStateMachine</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rjperes/SimpleStateMachine</RepositoryUrl>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

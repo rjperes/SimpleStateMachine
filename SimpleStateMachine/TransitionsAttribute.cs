@@ -2,13 +2,8 @@
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public sealed class TransitionsAttribute<T> : Attribute
+    public sealed class TransitionsAttribute<T>(params T[] transitions) : Attribute
     {
-        public TransitionsAttribute(params T[] transitions)
-        {
-            this.Transitions = transitions?.Distinct().OrderBy(x => x) ?? Enumerable.Empty<T>();
-        }
-
-        public IEnumerable<T> Transitions { get; }
+        public IEnumerable<T> Transitions { get; } = transitions?.Distinct().OrderBy(x => x) ?? Enumerable.Empty<T>();
     }
 }

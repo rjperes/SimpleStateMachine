@@ -7,6 +7,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Simple State Machine</Title>
     <Authors>Ricardo Peres</Authors>
+    <PackageProjectUrl>https://github.com/rjperes/SimpleStateMachine</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rjperes/SimpleStateMachine</RepositoryUrl>
     <Version>1.2.1</Version>
   </PropertyGroup>
