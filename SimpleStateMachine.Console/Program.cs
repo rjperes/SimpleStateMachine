@@ -62,6 +62,7 @@ namespace SimpleStateMachine.Console
             var stateMachine = StateMachineExtensions.Create<TicketState>();
 
             var initialState = stateMachine.GetInitialState();
+            var state = stateMachine.GetState(created);
             var isInitialState = stateMachine.IsInitialState(created);
             var isFinalState = stateMachine.IsFinalState(created);
             var canTransitionToClosed = stateMachine.CanTransitionTo(created, TicketState.Closed);
