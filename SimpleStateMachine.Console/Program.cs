@@ -57,7 +57,7 @@
         static void ConvertFromAttributesToCode()
         {
             var created = TicketState.Created;
-            var stateMachine = SimpleStateMachineExtensions.Create<TicketState>();
+            var stateMachine = StateMachineExtensions.Create<TicketState>();
 
             var initialState = stateMachine.GetInitialState();
             var state = stateMachine.GetState(created);
@@ -71,7 +71,7 @@
         static void AlternativeUsingLoquacious()
         {
             var created = TicketState.Created;
-            var stateMachine = SimpleStateMachineExtensions.Create<TicketState>();
+            var stateMachine = created.Create();
 
             stateMachine
                 .From(created)

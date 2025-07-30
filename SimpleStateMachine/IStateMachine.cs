@@ -25,6 +25,14 @@ namespace SimpleStateMachine
 
         public IStateMachine<T> CanTransitionTo(T state, params T[] otherStates)
         {
+            ArgumentNullException.ThrowIfNull(otherStates);
+
+            if (otherStates.Length == 0)
+            {
+                _transitions.Remove(state);
+                return this;
+            }
+
             otherStates = otherStates ?? [];
             _transitions[state] = [.. otherStates];
             return this;

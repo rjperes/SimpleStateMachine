@@ -1,6 +1,6 @@
 ﻿namespace SimpleStateMachine
 {
-    public static class SimpleStateMachineExtensions
+    public static class StateMachineExtensions
     {
         public static IState<T> From<T>(this IStateMachine<T> stateMachine, T fromState, object? state = null) where T : struct, Enum
         {
@@ -12,7 +12,7 @@
         {
             var initialState = StateMachine.GetInitialState<T>();
 
-            ArgumentNullException.ThrowIfNull(initialState, $"The enum {typeof(T).Name} does not have an initial state.");
+            ArgumentNullException.ThrowIfNull(initialState);
 
             var stateMachine = initialState.Value.Create();
 
@@ -38,8 +38,13 @@
             ArgumentNullException.ThrowIfNull(stateMachine);
             ArgumentNullException.ThrowIfNull(transitions);
 
-            var currentTransitions = stateMachine.GetTransitions(state);
-            var allTransitions = currentTransitions.Concat(transitions).Distinct().ToArray();
+            T[] allTransitions = [];
+
+            if (transitions.Length != 0)
+            {
+                var currentTransitions = stateMachine.GetTransitions(state);
+                allTransitions = currentTransitions.Concat(transitions).Distinct().ToArray();
+            }
 
             return stateMachine.CanTransitionTo(state, allTransitions);
         }

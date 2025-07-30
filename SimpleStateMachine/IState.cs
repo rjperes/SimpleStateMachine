@@ -3,6 +3,7 @@
     public interface IState<T> where T : struct, Enum
     {
         IState<T> To(params T[] states);
+        IState<T> Clear();
     }
 
     class State<T> : IState<T> where T : struct, Enum
@@ -27,6 +28,12 @@
         {
             ArgumentNullException.ThrowIfNull(states);
             _stateMachine.AppendTransitions(_fromState, states);
+            return this;
+        }
+
+        public IState<T> Clear()
+        {
+            _stateMachine.CanTransitionTo(_fromState, []);
             return this;
         }
     }
