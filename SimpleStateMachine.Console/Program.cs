@@ -1,6 +1,4 @@
-﻿using SimpleStateMachine.Extensions;
-
-namespace SimpleStateMachine.Console
+﻿namespace SimpleStateMachine.Console
 {
     public enum TicketState
     {
@@ -59,7 +57,7 @@ namespace SimpleStateMachine.Console
         static void ConvertFromAttributesToCode()
         {
             var created = TicketState.Created;
-            var stateMachine = StateMachineExtensions.Create<TicketState>();
+            var stateMachine = SimpleStateMachineExtensions.Create<TicketState>();
 
             var initialState = stateMachine.GetInitialState();
             var state = stateMachine.GetState(created);
@@ -70,10 +68,39 @@ namespace SimpleStateMachine.Console
             var transitions = stateMachine.GetTransitions(created);
         }
 
-        static void Main(string[] args)
+        static void AlternativeUsingLoquacious()
+        {
+            var created = TicketState.Created;
+            var stateMachine = SimpleStateMachineExtensions.Create<TicketState>();
+
+            stateMachine
+                .From(created)
+                .To(TicketState.Ready, TicketState.Closed);
+            stateMachine
+                .From(TicketState.Ready)
+                .To(TicketState.InProgress, TicketState.Blocked, TicketState.Closed);
+            stateMachine
+                .From(TicketState.InProgress)
+                .To(TicketState.Blocked, TicketState.InReview, TicketState.Closed, TicketState.Ready);
+            stateMachine
+                .From(TicketState.Blocked)
+                .To(TicketState.InProgress, TicketState.Closed);
+            stateMachine
+                .From(TicketState.InReview)
+                .To(TicketState.InProgress, TicketState.Closed);
+
+            var initialState = stateMachine.GetInitialState();
+            var state = stateMachine.GetState(created);
+            var isInitialState = stateMachine.IsInitialState(created);
+            var isFinalState = stateMachine.IsFinalState(created);
+            var transitions = stateMachine.GetTransitions(created);
+        }
+
+        static void Main()
         {
             AlternativeUsingAttributes();
             AlternativeUsingCode();
+            AlternativeUsingLoquacious();
             ConvertFromAttributesToCode();
         }
     }
