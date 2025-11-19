@@ -8,6 +8,13 @@
             return new State<T>(stateMachine, fromState, state);
         }
 
+        public static bool IsValidTransition<T>(this IStateMachine<T> stateMachine, T fromState, T toState) where T : Enum
+        {
+            ArgumentNullException.ThrowIfNull(stateMachine);
+            var transitions = stateMachine.GetTransitions(fromState);
+            return transitions.Contains(toState);
+        }
+
         public static IStateMachine<T> Create<T>() where T : struct, Enum
         {
             var initialState = StateMachine.GetInitialState<T>();

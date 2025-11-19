@@ -28,8 +28,8 @@
             var isStateMachine = created.IsStateMachine();
             var isInitialState = created.IsInitialState();
             var isFinalState = created.IsFinalState();
-            var canTransitionToClosed = created.CanTransitionTo(TicketState.Closed);
-            var canTransitionToBlocked = created.CanTransitionTo(TicketState.Blocked);
+            var canTransitionToClosed = created.IsValidTransition(TicketState.Closed);
+            var canTransitionToBlocked = created.IsValidTransition(TicketState.Blocked);
             var transitions = created.GetTransitions();
         }
 

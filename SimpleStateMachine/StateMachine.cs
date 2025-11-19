@@ -60,7 +60,7 @@ namespace SimpleStateMachine
             return type.IsEnum && Enum.GetNames(type).Count(name => HasAttribute<InitialStateAttribute>(GetField(type, name))) == 1;
         }
 
-        public static bool CanTransitionTo<T>(this T state, T target) where T : Enum
+        public static bool IsValidTransition<T>(this T state, T target) where T : Enum
         {
             return IsStateMachine<T>() && GetTransitions<T>(state).Contains(target);
         }
