@@ -8,6 +8,23 @@
             return new State<T>(stateMachine, fromState, state);
         }
 
+        public static IStateMachine<T> CanTransitionFromAnyTo<T>(this IStateMachine<T> stateMachine, T finalState) where T : struct, Enum
+        {
+            ArgumentNullException.ThrowIfNull(stateMachine);
+
+            foreach (var state in Enum.GetValues<T>())
+            {
+                if (state!.Equals(finalState))
+                {
+                    continue;
+                }
+
+                stateMachine.CanTransitionTo(finalState, state);
+            }
+            
+            return stateMachine;
+        }
+
         public static bool IsValidTransition<T>(this IStateMachine<T> stateMachine, T fromState, T toState) where T : Enum
         {
             ArgumentNullException.ThrowIfNull(stateMachine);

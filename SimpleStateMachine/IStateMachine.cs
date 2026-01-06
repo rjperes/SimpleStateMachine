@@ -1,5 +1,4 @@
-﻿
-namespace SimpleStateMachine
+﻿namespace SimpleStateMachine
 {
     public interface IStateMachine<T> where T : Enum
     {
@@ -22,7 +21,7 @@ namespace SimpleStateMachine
         {
             return _initialState;
         }
-
+        
         public IStateMachine<T> CanTransitionTo(T state, params T[] otherStates)
         {
             ArgumentNullException.ThrowIfNull(otherStates);
@@ -33,7 +32,7 @@ namespace SimpleStateMachine
                 return this;
             }
 
-            otherStates = otherStates ?? [];
+            otherStates = otherStates?.Distinct()?.Except([state])?.ToArray() ?? [];
             _transitions[state] = [.. otherStates];
             return this;
         }
