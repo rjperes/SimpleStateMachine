@@ -52,7 +52,7 @@
             {
                 return transitions.Count == 0;
             }
-            return false;
+            return true;
         }
 
         public bool IsInitialState(T state)
