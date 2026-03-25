@@ -73,6 +73,13 @@
             return stateMachine.CanTransitionTo(state, allTransitions);
         }
 
+        public static IEnumerable<T> GetUnknownStates<T>(this IStateMachine<T> stateMachine) where T : Enum
+        {
+            ArgumentNullException.ThrowIfNull(stateMachine);
+
+            return Enum.GetValues(typeof(T)).Cast<T>().Where(state => !stateMachine.GetTransitions(state).Any());
+        }
+
         public static bool IsFinite<T>(this IStateMachine<T> stateMachine) where T : Enum
         {
             ArgumentNullException.ThrowIfNull(stateMachine);
