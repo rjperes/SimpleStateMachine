@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStateMachine", "SimpleStateMachine\SimpleStateMachine.csproj", "{1E60CEDD-03ED-485E-B03A-15DFEC0B1FD5}"
 EndProject
@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStateMachine.Extensions", "SimpleStateMachine.Extensions\SimpleStateMachine.Extensions.csproj", "{7468DC83-8102-47FA-B45A-C53AE15B4B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStateMachine.UnitTests", "SimpleStateMachine.UnitTests\SimpleStateMachine.UnitTests.csproj", "{3288A7D2-8EC4-4124-B2A5-0FDCADF594DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7468DC83-8102-47FA-B45A-C53AE15B4B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7468DC83-8102-47FA-B45A-C53AE15B4B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7468DC83-8102-47FA-B45A-C53AE15B4B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3288A7D2-8EC4-4124-B2A5-0FDCADF594DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3288A7D2-8EC4-4124-B2A5-0FDCADF594DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3288A7D2-8EC4-4124-B2A5-0FDCADF594DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3288A7D2-8EC4-4124-B2A5-0FDCADF594DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

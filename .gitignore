@@ -10,3 +10,5 @@
 /publish_nuget.cmd
 /SimpleStateMachine.Extensions/bin
 /SimpleStateMachine.Extensions/obj
+/SimpleStateMachine.UnitTests/bin
+/SimpleStateMachine.UnitTests/obj
