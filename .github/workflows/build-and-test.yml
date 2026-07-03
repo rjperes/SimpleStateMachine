@@ -19,10 +19,10 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore SimpleStateMachine.slnx
+      run: dotnet restore ${GITHUB_REPOSITORY#*/}.slnx
 
     - name: Build
-      run: dotnet build SimpleStateMachine.slnx --no-restore
+      run: dotnet build ${GITHUB_REPOSITORY#*/}.slnx --no-restore
 
     - name: Run tests
-      run: dotnet test SimpleStateMachine.slnx --no-build --verbosity normal
+      run: dotnet test ${GITHUB_REPOSITORY#*/}.slnx --no-build --verbosity normal
