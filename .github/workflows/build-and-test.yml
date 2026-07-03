@@ -21,10 +21,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ${GITHUB_REPOSITORY#*/}.slnx
+        run: dotnet restore ${GITHUB_REPOSITORY#*/}.sln
 
       - name: Build
-        run: dotnet build ${GITHUB_REPOSITORY#*/}.slnx --no-restore
+        run: dotnet build ${GITHUB_REPOSITORY#*/}.sln --no-restore
 
       - name: Run tests
-        run: dotnet test ${GITHUB_REPOSITORY#*/}.slnx --no-build --verbosity normal
+        run: dotnet test ${GITHUB_REPOSITORY#*/}.sln --no-build --verbosity normal
